@@ -1,7 +1,11 @@
 import React from 'react'
 import { HalfCircle1, HalfCircle2, HalfCircle3 } from '../StyledComponent/components'
+import Types from '../Customs/Types';
 
 const EachDetz1 = (props) => {
+
+    const typs = Types(location.pathname)
+
     const {color, firstAngle, sc, secondAngle, ttl, RFRM, RTRM, wImg} = props.file;
 
     const type = () => {
@@ -17,7 +21,7 @@ const EachDetz1 = (props) => {
     <div className="eachManga">
 
         <div className="mangaImg">
-            <img onError={(e) => e.currentTarget.src="" } src={wImg} alt="" />
+            <img onError={(e) => e.currentTarget.src = (typs == "movies" || typs == "series") ? "" : "" } src={wImg} alt="" />
             <div className="MangaRating">
                 <div className="ratefunc">
                     <div className="fullCircle">

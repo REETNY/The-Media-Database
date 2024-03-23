@@ -28,7 +28,7 @@ const MT_Index = () => {
     B: ""
   })
 
-  const image_url = `https://image.tmdb.org/t/p/w500${data?.backdrop_path}`;
+  const image_url = `https://image.tmdb.org/t/p/w500${data?.poster_path}`;
   const title = data?.title;
   const synopsis = data?.overview;
   const score = data?.vote_average;

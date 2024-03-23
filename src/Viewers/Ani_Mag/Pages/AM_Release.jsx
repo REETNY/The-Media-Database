@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { rgbColor } from '../../../app/AppFunctions/colorPicker'
 import Types from '../../../Customs/Types'
 import { useGetFullAnimeQuery, useGetFullMangaQuery } from '../../../app/Jikan/jikanSlice'
+import { useGetReleasesQuery } from '../../../app/Tmdb/TmdbSlice'
 
 const AM_Release = () => {
 
@@ -25,13 +26,13 @@ const AM_Release = () => {
     : type == "manga"
     ? useGetFullMangaQuery(id)
     : type == "movies"
-    ? ""
-    : ''
+    ? useGetReleasesQuery({id, type: "movie"})
+    : useGetReleasesQuery({id, type: "tv"})
 
   
 
 
-    if(!isFetching && result && isSuccess){
+    if(!isFetching && result && isSuccess && (type == "anime" || type == "manga")) {
 
         const {entities, ids} = result;
         const dates = type == "anime"
@@ -48,7 +49,30 @@ const AM_Release = () => {
             <Skeletal_Struc property={dates} type={"Dates"} />
         </>
         )
-  }
+    }
+
+    console.log(result);
+
+    if(!isFetching && result && isSuccess && (type == "series" || type == "movies")) {
+
+        const {entities, ids} = result;
+        const dates = 
+        (type == "anime")
+        ?  entities[ids].aired 
+        : (type == "manga")
+        ? entities[id].published
+        : (type == "movies")
+        ? result?.results != undefined ? result?.results : ""
+        : result?.results != undefined? result?.results : ""
+
+
+        return (
+        <>
+            <Skeletal_Struc property={dates} type={"Dates"} />
+        </>
+        )
+    }
+
 
 }
 

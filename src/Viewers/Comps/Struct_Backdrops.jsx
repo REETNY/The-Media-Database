@@ -1,17 +1,20 @@
 import React from 'react'
 import Types from '../../Customs/Types';
-import { FaLock } from "react-icons/fa"
+import { FaLock, FaStar } from "react-icons/fa"
 import { v4 as uuidv4 } from 'uuid';
+
 
 // also used for posters and logos
 
 const Struct_Backdrops = (props) => {
-  
+  let typs = Types(location.pathname)
   let backdrops = props?.property;
+  let typeSet = props?.typeSet
+  let state = props?.strCo;
+
+  const DisplayNames = new Intl.DisplayNames(["en"], {type: "language"})
 
   let mappedArr = [];
-
-  let typs = Types(location.pathname)
 
   const mediaType = location.pathname;
 
@@ -93,20 +96,79 @@ const Struct_Backdrops = (props) => {
       
     })
   }else{
+    mappedArr = 
+    backdrops 
+    ? backdrops?.map((item) => {
+      let langType = state == "No Language" ? null : state
 
+      if(langType != item.iso_639_1)return;
+      return(
+        <div key={uuidv4()} className="drops_cont">
+          <div className="drop_cont_hero">
+            <img src={`https://image.tmdb.org/t/p/w500${item.file_path}`} alt={"View Orirginal"} />
+          </div>
+          <div className="drop_cont_details">
+            <div className="drop_content">
+              <span className="drop_content_item">Info</span>
+              <span className="drop_content_item"><FaLock /></span>
+            </div>
+            {(typeSet == "logo") && <div className="drop_content">
+              <span className="drop_content_item">Format</span>
+              <span className="drop_content_item">{"typ"}</span>
+            </div>}
+            <div className="drop_content">
+              <span className="drop_content_item">Added By</span>
+              <span className="drop_content_item">{"addedBy"}</span>
+            </div>
+            <div className="drop_content">
+              <span className="drop_content_item">Original Size</span>
+              <span className="drop_content_item">
+                {item.width} by {item.height}
+              </span>
+            </div>
+            <div className="drop_content">
+              <span className="drop_content_item">Language</span>
+              <span className="drop_content_item_Lang">
+                {
+                  state == "No Language" 
+                  ? "No Language" 
+                  : DisplayNames.of(state)
+                }
+              </span>
+            </div>
+            {(typeSet == "poster") &&  <div className="drop_content">
+              <span className="drop_content_item">Primary</span>
+              <span className="drop_content_item"><FaStar /></span>
+            </div>}
+          </div>
+        </div> 
+      )
+    })
+    : []
   }
 
-  console.log(backdrops);
+  if(typs == "anime" || typs == "manga"){
+    return (
+      <div className="eachStruct_2_cont_BPL">
+        {
+          (typs == "anime" || typs == "manga")
+          ? mappedArr.flat()
+          : ""
+        }
+      </div>
+    )
+  }
 
-  return (
-    <div className="eachStruct_2_cont_BPL">
-      {
-        (typs == "anime" || typs == "manga")
-        ? mappedArr.flat()
-        : ""
-      }
-    </div>
-  )
+  if(typs == "movies" || typs == "series"){
+    return (
+      <div className="eachStruct_2_cont_BPL">
+        {
+          mappedArr
+        }
+      </div>
+    )
+  }
+  
 }
 
 export default Struct_Backdrops

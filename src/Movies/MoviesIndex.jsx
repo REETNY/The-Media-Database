@@ -102,7 +102,7 @@ const MoviesIndex = () => {
   } = useGetMoviesQuery({options: options, type: pathPolifier})
 
 
-  console.log(moviesData, with_genres);
+  // console.log(moviesData, with_genres);
 
   let mappedData = [];
 

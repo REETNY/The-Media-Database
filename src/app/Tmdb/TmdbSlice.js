@@ -52,6 +52,7 @@ export const extendedTmdbApi = TmdbApiSlice.injectEndpoints({
                 }
             }),
             transformResponse: (res) => {
+                console.log(res);
                 let details = {
                     num_of_pages: res?.total_pages,
                     last_visible_page: res?.total_pages,
@@ -69,7 +70,7 @@ export const extendedTmdbApi = TmdbApiSlice.injectEndpoints({
             },
             providesTags: (err, result, args) => 
             result 
-            ? [...result.ids.map((ids)  => ({item: "Movies", id}))]
+            ? [...result?.ids?.map((id)  => ({item: "Movies", id}))]
             : [{type: "Movies", id: "LIST"}]
         }),
 
@@ -187,7 +188,8 @@ export const extendedTmdbApi = TmdbApiSlice.injectEndpoints({
     })
 })
 
-export const { useGetGenresQuery, useGetCertificationQuery, useGetWatchProviderQuery, useGetMoviesQuery, useGetMoviesByIdQuery, useGetReviewQuery, useGetRecommendationQuery, useGetImagesQuery, useGetVideosQuery, useGetCreditsQuery } = TmdbApiSlice
+
+export const { useGetGenresQuery, useGetCertificationQuery, useGetWatchProviderQuery, useGetMoviesQuery, useGetMoviesByIdQuery, useGetReviewQuery, useGetRecommendationQuery, useGetImagesQuery, useGetVideosQuery, useGetCreditsQuery, useGetAltTitlesQuery, useGetReleasesQuery, useGetTranslationQuery } = TmdbApiSlice
 
 
 const selectData = extendedTmdbApi.endpoints.getMovies.select();

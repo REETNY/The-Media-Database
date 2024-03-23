@@ -3,29 +3,33 @@ import { Outlet } from 'react-router-dom'
 import Header2 from '../../Components/Header2'
 import { useGetFullAnimeQuery, useGetFullMangaQuery } from '../../app/Jikan/jikanSlice';
 import { useParams } from 'react-router-dom'
+import { useGetMoviesByIdQuery } from '../../app/Tmdb/TmdbSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getColor } from '../../app/AppFunctions/colorPicker';
 import { colorStatus } from '../../app/AppFunctions/colorPicker';
+import Types from '../../Customs/Types';
 
 const Ani_Mag_Layout = () => {
 
   let param = useParams()
 
-  const type = () => {
-    let url = location.pathname;
-    if(url.includes("manga")){
-      return "manga"
-    }else{
-      return "anime"
-    }
-  }
+  const type = Types(location.pathname)
 
   const {
     data: result,
     isError,
     isSuccess,
     isLoading
-  } = type() == "manga" ? useGetFullMangaQuery(param.id) : useGetFullAnimeQuery(param.id)
+  } = 
+  type == "manga"
+  ? useGetFullMangaQuery(param.id) 
+  : type == "anime" 
+  ? useGetFullAnimeQuery(param.id)
+  : type == "movies"
+  ? useGetMoviesByIdQuery({id: param.id, type: "movie"})
+  : type == "series"
+  ? ""
+  : ""
 
   let dispatch = useDispatch()
   let statusWindow = useSelector(colorStatus)

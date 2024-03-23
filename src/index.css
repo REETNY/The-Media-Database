@@ -5411,3 +5411,251 @@ html,body{
         width: 40vw;
     }
 }
+
+
+
+
+
+
+/* take back to top */
+.casts_crew.ouster .tmdb_casts_crews{
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    column-gap: 10px;
+    /* background: firebrick; */
+}
+
+.tmdb_casts_crews .sub_1_tmdb, .tmdb_casts_crews .sub_2_tmdb{
+    width: 100%;
+    height: fit-content;
+}
+
+.sub_1_tmdb .tmdb_casts_head{
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+}
+
+.sub_1_tmdb .tmdb_casts_cont{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.sub_2_tmdb .tmdb_crew_head{
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+}
+
+.tmdb_crews_cont{
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 25px;
+}
+
+.tmdb_crews_cont .tmdb_crews_data{
+    width: 100%;
+    height: fit-content;
+}
+
+.crew_department_head{
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+}
+
+.crew_department_items{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.each_dept{
+    width: 200px;
+    height: fit-content;
+    overflow: hidden;
+    background: white;
+    border-radius: 5px;
+}
+
+.each_dept_img{
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: rgb(219, 214, 214);
+
+}
+
+.each_dept_img img{
+    width: 100%;
+    height: 100%;
+}
+
+.each_dept_dets{
+    width: 100%;
+    height: fit-content;
+    padding: 8px 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 2px;
+}
+
+.each_dept_dets .worker_name{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.each_dept_dets .worker_extras{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+
+.T_head_flag{
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.T_head_flag img{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.translatorForTmdb{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.translateTmdb{
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.headTranslateTmdb{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: gray;
+    column-gap: 5px;
+}
+
+.translate_country_details{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.country_name_reg{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.country_code_reg{
+    font-size: 14px;
+    font-weight: 70;
+}
+
+.bodyTranslateTmdb{
+    width: 100%;
+    height: fit-content;
+    padding: 0px 0px;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.translate_sys{
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 103px 6fr 50px;
+    row-gap: 3px;
+}
+
+.translate_sys_fs{
+    width: 100%;
+    border-right: 2px solid #d3d1d1;
+    border-bottom: 2px solid #d3d1d1;
+    padding: 4px 15px;
+}
+
+.translate_sys_md{
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+    border-bottom: 2px solid #d3d1d1;
+    padding: 3px 10px;
+}
+
+.translate_sys_lt{
+    width: 100%;
+    border-left: 2px solid #d3d1d1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(221, 209, 209);
+    border-bottom: 2px solid #d3d1d1;
+}
+
+.translate_sys2{
+    width: 100%;
+    height: fit-content;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 4fr 60px 4fr 60px;
+}
+
+.translate_sys_fsd{
+    padding: 5px 0px;
+}
+
+.translate_sys_mdd1{
+    border-left: 2px solid #d3d1d1;
+    border-right: 2px solid #d3d1d1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(221, 209, 209);
+}
+
+.translate_sys_ltd{
+    border-left: 2px solid #d3d1d1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(221, 209, 209);
+}
+
+
+.reviewers_content_updateAt{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    font-size: 13px;
+    font-weight: 600;
+}

@@ -1,5 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const pathFinder = (url) => {
+    if(url.includes("popular")){
+        return "popular"
+    }else if(url.includes("now_playing")){
+        return "now_playing"
+    }else if(url.includes("top_rated")){
+        return "top_rated"
+    }else if(url.includes("upcoming")){
+        return "upcoming"
+    }else if(url.includes("air_today")){
+        return "airing_today"
+    }else if(url.includes("on_the_air")){
+        return "on_the_air"
+    }
+}
+
 const initialState = {
     calender: {
         calen1:{
@@ -38,8 +54,9 @@ const initialState = {
     isBtnQuery: false,
     urlQuerySearch: "",
     isIntersect: false,
-    mov_tv: ""
+    mov_tv: pathFinder(location.pathname)
 }
+
 
 export const FilterSlice1 = createSlice({
     name: "filterSlice1",

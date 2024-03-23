@@ -16,7 +16,7 @@ const MoviesDetz = (props) => {
   }
 
   let mdf = {...props.mdf}
-  let wImg = !mdf.backdrop_path ? F1 : `https://image.tmdb.org/t/p/w500${mdf.backdrop_path}`;
+  let wImg = !mdf.backdrop_path ? F1 : `https://image.tmdb.org/t/p/w500${mdf.poster_path}`;
   let ttl = !mdf.title ? "" : mdf.title;
   let sc = !mdf.vote_average ? 20 : parseFloat(mdf.vote_average) * 10
 

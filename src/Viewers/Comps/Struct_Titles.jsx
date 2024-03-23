@@ -1,6 +1,11 @@
 import React from 'react'
+import Countries from "../../../countries.json";
+import Types from '../../Customs/Types';
 
 const Struct_Titles = (props) => {
+  
+  const types = Types(location.pathname)
+
   const struc_titles = props?.property?.map((item, index) => {
     let classTil;
     if (item.type == "Default"){
@@ -8,19 +13,22 @@ const Struct_Titles = (props) => {
     }else if(item.type == "Synonym"){
       classTil = "Others"
     }else{
-      classTil = item.type;
+      classTil = (types == "anime" || types == "manga") ? item.type : item.iso_3166_1
+      console.log(classTil);
     }
 
     return (
       <div key={index} id={classTil} className="struc_T">
         <div className="struc_T_head">
-          {/* <span className="T_head_flag"></span> */}
+          { (types == "movies" || types == "series") && <span className="T_head_flag">
+            <img src={`https://flagcdn.com/w40/${item?.iso_3166_1.toLowerCase()}.png`} alt="" />
+          </span> }
           <span className="T_head_name">{
             item.type == "Default"
             ? "Main"
             : item.type == "Synonym" 
             ? "Others"
-            : item.type
+            : (types == "anime" || types == "manga") ? item.type : Countries.map((country) => item.iso_3166_1 == country.code ? country.name : "")
           }</span>
         </div>
         <div className="struc_T_table">

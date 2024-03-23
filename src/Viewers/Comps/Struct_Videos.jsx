@@ -6,6 +6,7 @@ import Nothing from '../../UI_Loading/UI/Nothing';
 import NOImage from "../../assets/No_Image.png"
 
 const Struct_Videos = (props) => {
+  const typs = Types(location.pathname)
   const videos = props?.property;
   const state = props?.strCo;
   const [vidUrl, setVid] = useState({
@@ -16,10 +17,10 @@ const Struct_Videos = (props) => {
 
   const IframeCont = useRef(null)
   const Iframe = useRef(null)
-
-  const typs = Types(location.pathname);
   
-  let currChoice = videos[state];
+  let currChoice = typs == "anime" ? videos[state] : videos.filter((item) => item.type == state ? item : false);
+
+  console.log(currChoice);
 
   let container = [];
 
@@ -95,6 +96,37 @@ const Struct_Videos = (props) => {
             <div className="epis_data">
               <span className="epis_head">Title:</span>
               <span className="epis_content">{title}</span>
+            </div>
+          </div>
+        </div>
+      )
+    })
+  }
+
+  if(typs == "movies" || typs == "series"){
+    container = currChoice?.map((item, index) => {
+      let title = item.name;
+      let embed_url = `https://www.youtube.com/embed/${item?.key}`;
+      let image_url = `http://img.youtube.com/vi/${item?.key}/0.jpg`;
+      let type = item.type
+
+      return(
+        <div key={index} className="episodes_vid">
+          <div className="epis_hero_cont">
+            <img src={image_url || NOImage} alt={title} />
+            <span onClick={() => {
+              setVid(() => ({url: embed_url, title, isOn: true}))
+              addEffect(true)
+            }} className="epis_play"><FaPlay /></span>
+          </div>
+          <div className="epis_details">
+            <div className="epis_data">
+              <span className="epis_head">Title:</span>
+              <span className="epis_content">{title}</span>
+            </div>
+            <div className="epis_data">
+              <span className="epis_head">Type:</span>
+              <span className="epis_content">{type}</span>
             </div>
           </div>
         </div>

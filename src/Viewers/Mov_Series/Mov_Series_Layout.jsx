@@ -31,12 +31,14 @@ const Mov_Series_Layout = () => {
   ? useGetMoviesByIdQuery({id: param.id})
   : ''
 
+  console.log(result);
+
   let dispatch = useDispatch()
   let statusWindow = useSelector(colorStatus);
 
   useEffect(() => {
     if(result == null || result == undefined)return
-      dispatch(getColor({id: param.id, imageSrc : `https://image.tmdb.org/t/p/w500${result.backdrop_path}`})).unwrap()
+      dispatch(getColor({id: param.id, imageSrc : `https://image.tmdb.org/t/p/w500${result.poster_path}`})).unwrap()
   }, [result])
 
   if(isSuccess && !isFetching && statusWindow == "fulfilled"){

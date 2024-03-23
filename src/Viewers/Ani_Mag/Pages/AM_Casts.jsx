@@ -5,6 +5,8 @@ import Types from '../../../Customs/Types'
 import { useParams } from 'react-router-dom'
 import { rgbColor } from '../../../app/AppFunctions/colorPicker'
 import { useSelector } from 'react-redux'
+import { useGetCreditsQuery } from '../../../app/Tmdb/TmdbSlice'
+import BrokenImage from "../../../assets/Broken.svg"
 
 const AM_Casts = () => {
 
@@ -23,8 +25,8 @@ const AM_Casts = () => {
   : types == "manga"
   ? useMangaCastQuery({id})
   : types == "movies"
-  ? ""
-  : ""
+  ? useGetCreditsQuery({id, type: "movie"})
+  : useGetCreditsQuery({id, type: "tv"})
 
   const statusClr = useSelector(rgbColor);
   const statusStyl = {
@@ -65,7 +67,7 @@ const AM_Casts = () => {
       return(<div key={index} className="character_voice_actor_cont">
         <div className="characterCont">
           <div className="characterImgCont">
-            <img className="charact_img" src={images.webp.image_url} alt={name} />
+            <img onError={(e) => e.target.src = BrokenImage } className="charact_img" src={images.webp.image_url} alt={name} />
           </div>
           <div className="character_info">
             <div className="character_name">{name}</div>
@@ -95,7 +97,7 @@ const AM_Casts = () => {
       return (
           <div key={index * 2} className="eachCharacter">
             <div className="eachCharacterImg">
-              <img src={images.webp.image_url} alt={name} />
+              <img onError={(e) => e.target.src = BrokenImage } src={images.webp.image_url} alt={name} />
             </div>
             <div className="eachCharacterDetzs">
               <div className="ecn">{name}</div>
@@ -118,7 +120,33 @@ const AM_Casts = () => {
     }
     
   })
+  : (types == "movies" && result != undefined)
+  ? result?.cast?.map((item, index) => {
+    return(
+      <div key={index * 5} className="each_dept">
+        <div className="each_dept_img">
+          <img onError={(e) => e.target.src = BrokenImage } src={`https://image.tmdb.org/t/p/w500${item?.profile_path}`} alt="" />
+        </div>
+        <div className="each_dept_dets">
+          <div className="worker_name">{item?.name}</div>
+          <div className="worker_extras">{item?.character}</div>
+        </div>
+      </div>
+    )
+  })
   : ""
+
+  let otherDepts = []
+  let filteredDept = []
+
+  if((types == "movies" || types == "series") && result?.crew){
+
+    otherDepts = result?.crew?.map((item) => {
+      return item.department
+    })
+
+    filteredDept = otherDepts.reduce((acc, curr) => acc.includes(curr) ? acc : [...acc, curr], []).sort()
+  }
 
 
   let nav = count.current.map((item, index) => {
@@ -131,7 +159,7 @@ const AM_Casts = () => {
 
       <div className={types == "anime" ? "casts_crew" : "casts_crew ouster"}>
         {
-          types == "anime" || types == "manga"
+          (types == "anime" || types == "manga")
           ? 
             <>
               {types == "anime" && <div className="casts_crews_nav">
@@ -151,7 +179,52 @@ const AM_Casts = () => {
                 </div>
               </div>
             </>
-          : ""
+          : 
+          <div className={"tmdb_casts_crews"}>
+
+            <div className="sub_1_tmdb">
+              <div className="tmdb_casts_head">Casts</div>
+              <div className="tmdb_casts_cont">
+                {dynAM}
+              </div>
+            </div>
+
+            <div className="sub_2_tmdb">
+              <div className="tmdb_crew_head">Crews</div>
+              <div className="tmdb_crews_cont">
+                {
+                  filteredDept.map((item, index) => {
+                    let heading = item;
+                    return (
+                      <div key={index} className="tmdb_crews_data">
+                        <div className="crew_department_head">{heading}</div>
+                        <div className='crew_department_items'>
+                          {
+                            ...result?.crew?.map((item) => {
+                              if(item.department != heading)return
+                              return(
+                                <div className="each_dept">
+                                  <div className="each_dept_img">
+                                    <img onError={(e) => e.target.src = BrokenImage } src={`https://image.tmdb.org/t/p/w500${item?.profile_path}`} alt="" />
+                                  </div>
+                                  <div className="each_dept_dets">
+                                    <div className="worker_name">{item?.name}</div>
+                                    <div className="worker_extras">{item?.job}</div>
+                                  </div>
+                                </div>
+                              )
+                            })
+                          }
+                        </div>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+            </div>
+            
+
+          </div>
         }
       </div>
     </section>

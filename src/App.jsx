@@ -44,6 +44,7 @@ import 'rsuite/Checkbox/styles/index.css';
 import MoviesIndex from './Movies/MoviesIndex'
 import Mov_Series_Layout from './Viewers/Mov_Series/Mov_Series_Layout'
 import MT_Index from './Viewers/Mov_Series/Pages/MT_Index'
+import Translation from './Viewers/Ani_Mag/Pages/Translation'
 
 
 function App() {
@@ -88,13 +89,10 @@ function App() {
                 <Route path='casts' element={<AM_Casts />} />
                 <Route path='titles' element={<AM_Titles />} />
                 <Route path='dates' element={<AM_Release />} />
-                <Route path='translation' element={<>Index of translation</>} />
               </Route>
 
               <Route path='images' element={<Ani_Mag />}>
                 <Route path='backdrops' element={<AM_Backdrop />} />
-                <Route path='logos' element={<AM_Logos />} />
-                <Route path='posters' element={<AM_Posters />} />
                 <Route path='videos' element={<AM_Videos />} />
               </Route>
 
@@ -118,10 +116,10 @@ function App() {
                 <Route path='casts' element={<AM_Casts />} />
                 <Route path='titles' element={<AM_Titles />} />
                 <Route path='dates' element={<AM_Release />} />
-                <Route path='translation' element={<>Index of translation</>} />
+                <Route path='translation' element={<Translation />} />
               </Route>
 
-              {/* <Route path='images' element={<Ani_Mag />}>
+              <Route path='images' element={<Ani_Mag />}>
                 <Route path='backdrops' element={<AM_Backdrop />} />
                 <Route path='logos' element={<AM_Logos />} />
                 <Route path='posters' element={<AM_Posters />} />
@@ -130,8 +128,7 @@ function App() {
 
               <Route path='reviews' element={<Ani_Mag />}>
                 <Route index element={<AM_Reviews />} />
-                
-              </Route> */}
+              </Route>
 
             </Route>
           )
