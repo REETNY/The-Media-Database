@@ -12,6 +12,9 @@ const Play_Trailer = (props) => {
         <span className="trailer_wrap_text">Play Trailer</span>
       </div>
     </div>
+
+
+
   )
 }
 

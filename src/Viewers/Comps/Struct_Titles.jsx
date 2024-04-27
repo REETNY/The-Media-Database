@@ -14,7 +14,6 @@ const Struct_Titles = (props) => {
       classTil = "Others"
     }else{
       classTil = (types == "anime" || types == "manga") ? item.type : item.iso_3166_1
-      console.log(classTil);
     }
 
     return (

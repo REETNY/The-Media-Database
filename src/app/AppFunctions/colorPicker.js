@@ -85,7 +85,6 @@ const ColorPicker = createSlice({
             .addCase(getColor.fulfilled, (state, action) => {
                 state.status = "fulfilled"
                 state.rgb = action.payload;
-                // console.log(action.payload);
             })
             .addCase(getColor.pending, (state, action) => {
                 state.status = "loading"

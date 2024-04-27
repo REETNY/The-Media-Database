@@ -83,10 +83,22 @@ const IndexHeader = () => {
           <div className="movies_link">
             <span className="mov_lin_text">TV Shows</span>
             <span className="mov_link">
-              <NavLink onClick={() => RouteChange()} className={({isActive}) => isActive ? "isActiveLink" : "notActiveLink"} to="tv/popular">popular</NavLink>
-              <NavLink onClick={() => RouteChange()} className={({isActive}) => isActive ? "isActiveLink" : "notActiveLink"} to="tv/airing_today">Airing Today</NavLink>
-              <NavLink onClick={() => RouteChange()} className={({isActive}) => isActive ? "isActiveLink" : "notActiveLink"} to="tv/on_the_air">On the air</NavLink>
-              <NavLink onClick={() => RouteChange()} className={({isActive}) => isActive ? "isActiveLink" : "notActiveLink"} to="tv/top_rated">Top Rated</NavLink>
+              <NavLink onClick={() => {
+                RouteChange()
+                dispatch(addNewRouteMv_Tv("popular"))
+              }} className={({isActive}) => isActive ? "isActiveLink" : "notActiveLink"} to="tv/popular">popular</NavLink>
+              <NavLink onClick={() => {
+                RouteChange()
+                dispatch(addNewRouteMv_Tv("airing_today"))
+              }} className={({isActive}) => isActive ? "isActiveLink" : "notActiveLink"} to="tv/airing_today">Airing Today</NavLink>
+              <NavLink onClick={() => {
+                RouteChange()
+                dispatch(addNewRouteMv_Tv("on_the_air"))
+              }} className={({isActive}) => isActive ? "isActiveLink" : "notActiveLink"} to="tv/on_the_air">On the air</NavLink>
+              <NavLink onClick={() => {
+                RouteChange()
+                dispatch(addNewRouteMv_Tv("top_rated"))
+              }} className={({isActive}) => isActive ? "isActiveLink" : "notActiveLink"} to="tv/top_rated">Top Rated</NavLink>
             </span>
           </div>
           

@@ -29,12 +29,12 @@ const MT_Index = () => {
   })
 
   const image_url = `https://image.tmdb.org/t/p/w500${data?.poster_path}`;
-  const title = data?.title;
+  const title = data?.title == null ? data.name : data.title;
   const synopsis = data?.overview;
   const score = data?.vote_average;
   const id = data?.id;
   const genres = data?.genres;
-  const aired = data?.release_date;
+  const aired = data?.release_date == null ? data.first_air_date : data.release_date;
   const chapters = null;
   const published = null;
   const volumes = null;
@@ -85,7 +85,7 @@ const MT_Index = () => {
     }else if(url.includes("movies")){
         return 'Movies'
     }else{
-        return "Series"
+        return "Tv"
     }
   }
 
@@ -163,6 +163,7 @@ const MT_Index = () => {
   }
 
   // hero desc cont
+
 
   return (
     <section className='forAM_Index'>
@@ -386,7 +387,7 @@ const MT_Index = () => {
         </div>
       </div>
 
-      {type != "Manga" && <Trailer_Player data={{isOn: trailer.isPlay , func: playTrailer, type: type().toLowerCase(), id}} />}
+      {(type != "Manga" && trailer.isPlay) && <Trailer_Player data={{isOn: trailer.isPlay , func: playTrailer, type: `${type() == "Series" ? "tv" : type().toLowerCase()}`, id}} />}
 
     </section>
   )

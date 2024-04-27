@@ -97,7 +97,6 @@ const SignUp = () => {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        console.log(err);
     }
 
     useEffect(() => {

@@ -52,7 +52,39 @@ export const extendedTmdbApi = TmdbApiSlice.injectEndpoints({
                 }
             }),
             transformResponse: (res) => {
-                console.log(res);
+
+                let details = {
+                    num_of_pages: res?.total_pages,
+                    last_visible_page: res?.total_pages,
+                    num_of_item: res?.total_results,
+                    current_page: res?.page,
+                    items: {
+                        per_page: res?.results?.length,
+                        count: res?.results?.length,
+                        total: res?.total_results
+                    },
+                    has_next_page: res?.page < res?.total_pages
+                }
+                initialState.moreDets = details
+                return fetchAdapter.setAll(initialState, res?.results)
+            },
+            providesTags: (err, result, args) => 
+            result 
+            ? [...result?.ids?.map((id)  => ({item: "Movies", id}))]
+            : [{type: "Movies", id: "LIST"}]
+        }),
+
+        getSeries: builder.query({
+            query: ({options, type}) => ({
+                url: Object.keys(options).length > 0 ? `/discover/tv` : `/tv/${type}?page=1`,
+                params: options,
+                headers: {
+                    Authorization: `${import.meta.env.VITE_TMDBKey}`,
+                    accept: 'application/json'
+                }
+            }),
+            transformResponse: (res) => {
+
                 let details = {
                     num_of_pages: res?.total_pages,
                     last_visible_page: res?.total_pages,
@@ -77,6 +109,16 @@ export const extendedTmdbApi = TmdbApiSlice.injectEndpoints({
         getMoviesById: builder.query({
             query: ({id}) => ({
                 url: `/movie/${id}?append_to_response=videos`,
+                headers: {
+                    Authorization: `${import.meta.env.VITE_TMDBKey}`,
+                    accept: 'application/json'
+                }
+            })
+        }),
+
+        getSeriesById: builder.query({
+            query: ({id}) => ({
+                url: `/tv/${id}?append_to_response=videos`,
                 headers: {
                     Authorization: `${import.meta.env.VITE_TMDBKey}`,
                     accept: 'application/json'
@@ -189,7 +231,7 @@ export const extendedTmdbApi = TmdbApiSlice.injectEndpoints({
 })
 
 
-export const { useGetGenresQuery, useGetCertificationQuery, useGetWatchProviderQuery, useGetMoviesQuery, useGetMoviesByIdQuery, useGetReviewQuery, useGetRecommendationQuery, useGetImagesQuery, useGetVideosQuery, useGetCreditsQuery, useGetAltTitlesQuery, useGetReleasesQuery, useGetTranslationQuery } = TmdbApiSlice
+export const { useGetGenresQuery, useGetCertificationQuery, useGetWatchProviderQuery, useGetMoviesQuery, useGetMoviesByIdQuery, useGetReviewQuery, useGetRecommendationQuery, useGetImagesQuery, useGetVideosQuery, useGetCreditsQuery, useGetAltTitlesQuery, useGetReleasesQuery, useGetTranslationQuery, useGetSeriesQuery, useGetSeriesByIdQuery } = TmdbApiSlice
 
 
 const selectData = extendedTmdbApi.endpoints.getMovies.select();

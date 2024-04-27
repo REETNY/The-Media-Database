@@ -9,7 +9,7 @@ const pathFinder = (url) => {
         return "top_rated"
     }else if(url.includes("upcoming")){
         return "upcoming"
-    }else if(url.includes("air_today")){
+    }else if(url.includes("airing_today")){
         return "airing_today"
     }else if(url.includes("on_the_air")){
         return "on_the_air"

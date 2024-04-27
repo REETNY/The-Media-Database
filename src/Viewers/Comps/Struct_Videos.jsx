@@ -20,8 +20,6 @@ const Struct_Videos = (props) => {
   
   let currChoice = typs == "anime" ? videos[state] : videos.filter((item) => item.type == state ? item : false);
 
-  console.log(currChoice);
-
   let container = [];
 
   if(currChoice && typs == "anime" && state == "episodes"){

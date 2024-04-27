@@ -21,7 +21,7 @@ export const AuthenticationSlice = createSlice({
 
         },
         getUserValid: () => {
-            console.log("deen");
+
             return state.isLoggedIn
         }
     }

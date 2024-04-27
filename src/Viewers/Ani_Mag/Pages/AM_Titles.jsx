@@ -26,10 +26,6 @@ const AM_Titles = () => {
   ? useGetAltTitlesQuery({id, type: "movie"})
   : useGetAltTitlesQuery({id, type: "tv"})
 
-  
-
-  console.log(result);
-
   if(!isFetching && result && isSuccess && (type == "anime" || type == "manga")){
 
     const {entities, ids} = result;

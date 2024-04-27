@@ -79,8 +79,6 @@ const MangaIndex = () => {
 
   let mappedData = []
 
-  console.log(data);
-
  if(isSuccess){
     mappedData = data.ids.map((id) => (<MangaDetz key={id} mdf={data.entities[id]} />))
   }

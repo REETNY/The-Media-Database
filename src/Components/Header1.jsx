@@ -280,8 +280,6 @@ const Header1 = ({TK}) => {
       return prev
     })
 
-    console.log(params);
-
     if(params.size == 1 && (val == "" || val == null) && isBtnReady){
       dispatch(setBtnQuery({val: false}))
     }else if(params.size >= 0 && (val == "" || val == null) && isBtnReady == false){
@@ -416,7 +414,7 @@ const Header1 = ({TK}) => {
   }, [])
 
   // logger
-  // console.log(availabilities);
+ 
 
   return (
       <div className={openFil ? `mangaFilters open` : "mangaFilters"}>
@@ -1105,8 +1103,6 @@ const Header1 = ({TK}) => {
                       value={[minScore, maxScore]}
 
                       onChangeCommitted={([minVal, maxVal], event) => {
-
-                        console.log(maxVal, minVal, rangeObj.current.score);
 
                         if(minVal != rangeObj.current.score.min){
                           rangeObj.current.score.min = minVal;

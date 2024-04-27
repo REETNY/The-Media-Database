@@ -2,8 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 let key = import.meta.env.VITE_TMDBKey;
 
-console.log(key);
-
 // "https://api.jikan.moe/v4"
 export const TmdbApiSlice = createApi({
     reducerPath: "apiTMDB",

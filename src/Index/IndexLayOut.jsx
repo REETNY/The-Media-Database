@@ -13,10 +13,10 @@ const IndexLayOut = () => {
 
   // if(hamBool){
   //   bodyElTag.style.overflow = "hidden"
-  //   console.log(bodyElTag);
+  //  
   // }else{
   //   bodyElTag.style.overflowY = "auto"
-  //   console.log(hamBool);
+
   // }
 
 

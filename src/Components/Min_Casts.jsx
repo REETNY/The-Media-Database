@@ -85,7 +85,6 @@ const Min_Casts = (props) => {
   ? useGetCreditsQuery({id: tmId.id, type: "movie"})
   : useGetCreditsQuery({id: tmId.id, type: "tv"})
     
-  console.log(result);
 
   if(isSuccess && (result?.data || result?.cast) ){
     const ren = 
@@ -122,8 +121,6 @@ const Min_Casts = (props) => {
           </div>
         )
       })
-
-    console.log(ren);
 
     return(
       <>

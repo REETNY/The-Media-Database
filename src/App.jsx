@@ -45,6 +45,8 @@ import MoviesIndex from './Movies/MoviesIndex'
 import Mov_Series_Layout from './Viewers/Mov_Series/Mov_Series_Layout'
 import MT_Index from './Viewers/Mov_Series/Pages/MT_Index'
 import Translation from './Viewers/Ani_Mag/Pages/Translation'
+import Tv_Layout from './Tv/Tv_Layout'
+import Tv_index from './Tv/Tv_index'
 
 
 function App() {
@@ -75,8 +77,8 @@ function App() {
         <Route index element={<MoviesIndex />} />
       </Route>
 
-      <Route path='tvshow/:option' element={<></>} >
-        <Route index element={<></>} />
+      <Route path='tv/:option' element={<Tv_Layout/>} >
+        <Route index element={<Tv_index />} />
       </Route>
 
       {
@@ -107,7 +109,7 @@ function App() {
       }
 
       {
-        ["/movies/:option/:id", "/tvshow/:option/:id"].map((item, index) => {
+        ["/movies/:option/:id", "/tv/:option/:id"].map((item, index) => {
           return(
             <Route path={item} element={<Mov_Series_Layout />} key={index}>
 

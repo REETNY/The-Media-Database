@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAnimeVideosQuery} from '../app/Jikan/jikanSlice';
+
 
 
 import Media_Backdrops from '../Components2/Media_Backdrops';
@@ -103,7 +103,7 @@ const Min_Media = (props) => {
                         : M_S.choice == "videos"
                         ? <Media_Videos id={id} M_S={M_S} />
                         : M_S.choice == "popular"
-                        ? (type() == "movies" || type() == "tv") ? <Media_Popular id={id} M_S={M_S} /> : ""
+                        ? <Media_Popular id={id} M_S={"backdrops"} /> 
                         : M_S.choice == "posters"
                         ? <Media_Posters id={id} M_S={M_S} />
                         : "Nothing To Show In Here!"

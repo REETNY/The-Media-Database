@@ -29,7 +29,6 @@ const AM_Backdrop = () => {
 
   let datas = result?.data
 
-  console.log(result);
 
   if((typs == "anime" || typs == "manga") && !isFetching && isSuccess){
     return (

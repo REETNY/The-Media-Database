@@ -51,8 +51,6 @@ const AM_Release = () => {
         )
     }
 
-    console.log(result);
-
     if(!isFetching && result && isSuccess && (type == "series" || type == "movies")) {
 
         const {entities, ids} = result;

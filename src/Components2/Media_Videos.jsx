@@ -106,7 +106,9 @@ const Media_Videos = ({id, M_S}) => {
     let mappedMedia = []
 
     if(type() == "anime"){
-        mappedMedia = (isSuccess && result?.data) && result?.data?.music_videos?.slice(0,5)?.map((item, index) => {
+        mappedMedia = 
+        (isSuccess && result?.data && result?.data?.music_videos.length > 0) 
+        ? result?.data?.music_videos?.slice(0,5)?.map((item, index) => {
             let image = item?.video?.images?.image_url;
             return (
                 <div key={index + 1} style={{width: `${screen.width <= 670 ? "calc(100vw - 20px)" : "450px"}`}} className='item'>
@@ -135,6 +137,38 @@ const Media_Videos = ({id, M_S}) => {
                 </div>
             )
         })
+        :(isSuccess && result?.data && result?.data?.promo?.length > 0)
+        ? result?.data?.promo?.slice(0,5)?.map((item, index) => {
+            let image = item?.trailer?.images?.image_url;
+            return (
+                <div key={index + 1} style={{width: `${screen.width <= 670 ? "calc(100vw - 20px)" : "450px"}`}} className='item'>
+                    <div className="mediaVid_items">
+                        <div className="medVid_item_click">
+                            <div className="imgVidLoad">
+                                {
+                                    <img src={image} alt={item.title} />
+                                }
+                            </div>
+                            <div className="openMedVid">
+                                <span onClick={() => {
+                                    vidUrl.current = ""
+                                    setUrl(item?.trailer?.embed_url, item?.title)
+                                    setPlay()
+                                }}>
+                                    <FaPlay />
+                                </span>
+
+                                <div className="animate1">
+                                    <span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+        : []
+
     }
 
     if(type() == "movies" || type() == "tv"){

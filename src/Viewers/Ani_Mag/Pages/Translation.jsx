@@ -20,9 +20,6 @@ const Translation = () => {
   ? useGetTranslationQuery({id, type: "movie"})
   : useGetTranslationQuery({id, type: "movie"})
 
-
-  console.log(result);
-
   if(!isFetching && isSuccess && result?.translations){
     let translate = result?.translations != undefined ? result?.translations : [];
     return (

@@ -61,6 +61,16 @@ const Read_Reviews = () => {
     return `${mthArr[month]} ${day}, ${year}`
   }
 
+  let imgFile = ""
+  let titlFile = ""
+
+  if(type == "anime" || type == "manga"){
+   imgFile = ""
+  }else{
+    imgFile = `https://image.tmdb.org/t/p/w500${resul?.poster_path}`;
+    titlFile = resul?.title
+  }
+
   let userComment = [];
 
   if(!isFetching && result && isSuccess && !isError){
@@ -72,8 +82,15 @@ const Read_Reviews = () => {
 
   return (
     <div className="mainUserReview">
-      <div className="userReviewBack"></div>
+
+      <div className="userReviewBack">
+        <div className="user_full_reviewer">
+          <img src={imgFile} alt="" />
+        </div>
+      </div>
+
       <div className="userReviewContent">
+        <div className="userReview_topic">{titlFile}</div>
         {
           userComment.map((item, index) => {
             if(type == "anime" || type == "manga"){
@@ -101,7 +118,8 @@ const Read_Reviews = () => {
             if(type == "movie" || type == "tv"){
               let malId = id + "-" + item.id;
               let author = item.author;
-              let { avatar_path, rating, name, username} = item.author_details;
+              let { avatar_path, name, username} = item.author_details;
+              let rating = item?.author_details?.rating == null ? 0 : item?.author_details?.rating;
               let content = item?.content;
               let up_date = item?.updated_at;
               let date = item?.created_at;

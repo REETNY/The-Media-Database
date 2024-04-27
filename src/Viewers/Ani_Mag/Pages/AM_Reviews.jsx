@@ -74,7 +74,8 @@ const AM_Reviews = () => {
         reviews_discuss = result?.results?.map((item, index) => {
             let malId = id + "-" + item.id;
             let author = item.author;
-            let { avatar_path, rating, name, username} = item.author_details;
+            let { avatar_path, name, username} = item.author_details;
+            let rating = item?.author_details?.rating == null ? 0 : item?.author_details?.rating;
             let content = item?.content;
             let up_date = item?.updated_at;
             let date = item?.created_at;

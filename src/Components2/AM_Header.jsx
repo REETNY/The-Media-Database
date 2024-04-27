@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import Types from '../Customs/Types'
-import { useGetMoviesByIdQuery } from '../app/Tmdb/TmdbSlice'
+import { useGetMoviesByIdQuery, useGetSeriesByIdQuery } from '../app/Tmdb/TmdbSlice'
 
 const AM_Header = ({bgClr}) => {
   const types = Types(location.pathname)
@@ -22,8 +22,12 @@ const AM_Header = ({bgClr}) => {
     let y = location.pathname;
     if(y.includes("anime")){
       return "anime"
-    }else{
+    }else if(url.includes("manga")){
       return "manga"
+    }else if(url.includes("movies")){
+      return "movies"
+    }else if(url.includes("tv")){
+      return "series"
     }
   }
 
@@ -36,12 +40,10 @@ const AM_Header = ({bgClr}) => {
   } = types == "movies" 
   ? useGetMoviesByIdQuery({id, type: "movie"})
   : types == "series"
-  ? useGetMoviesByIdQuery({id, type: "tv"})
+  ? useGetSeriesByIdQuery({id, type: "tv"})
   : ""
 
   const locate = location.pathname;
-
-  console.log();
   
   if(types == "anime" || types == "manga"){
     return (
@@ -70,7 +72,7 @@ const AM_Header = ({bgClr}) => {
     return (
       <div style={{background: `rgb(${bgClr})`}} className="innerHeader_el">
         <div className="hero_head_img">
-          <img src={`https://image.tmdb.org/t/p/w500/${res?.poster_path}`} alt={res?.title} />
+          <img src={`https://image.tmdb.org/t/p/w500/${res?.poster_path}`} alt={type() != "series" ? res?.title : res?.name} />
         </div>
         <div className="dets_head">
           <div className="dets_head_title">

@@ -98,7 +98,6 @@ const AnimeIndex = () => {
       </section>
     )
   }else if(isFetching){
-    console.log("loading");
     return (<div>IS LOADING .........</div>)
   }
 }

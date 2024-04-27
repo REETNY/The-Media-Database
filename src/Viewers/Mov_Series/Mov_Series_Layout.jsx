@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getColor } from '../../app/AppFunctions/colorPicker';
 import { colorStatus } from '../../app/AppFunctions/colorPicker';
-import { useGetMoviesByIdQuery } from '../../app/Tmdb/TmdbSlice';
+import { useGetMoviesByIdQuery, useGetSeriesByIdQuery } from '../../app/Tmdb/TmdbSlice';
 
 const Mov_Series_Layout = () => {
 
@@ -29,10 +29,10 @@ const Mov_Series_Layout = () => {
     data: result
   } = type() == "movies"
   ? useGetMoviesByIdQuery({id: param.id})
-  : ''
-
-  console.log(result);
-
+  : type() == "series"
+  ? useGetSeriesByIdQuery({id: param.id})
+  : ""
+  
   let dispatch = useDispatch()
   let statusWindow = useSelector(colorStatus);
 

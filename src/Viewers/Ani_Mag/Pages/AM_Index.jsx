@@ -70,8 +70,12 @@ const AM_Index = () => {
     let url = location.pathname;
     if(url.includes("manga")){
       return "Manga"
-    }else{
+    }else if(url.includes("anime")){
       return "Anime"
+    }else if(url.includes("movies")){
+      return "movies"
+    }else if(url.includes("tv")){
+      return "tv"
     }
   }
 
@@ -103,13 +107,6 @@ const AM_Index = () => {
   }
 
   const playTrailer = () => {
-    if(trailer.isPlay){
-      let cont = document.querySelector(".trailer_video_abso_wrapper");
-      cont.style.backdropFilter = `grayscale(100%)`
-    }else{
-      let cont = document.querySelector(".trailer_video_abso_wrapper");
-      cont.style.backdropFilter = `grayscale(100%)`
-    }
     setTT((obj) => ({...obj, isPlay: !trailer.isPlay}))
     document.body.style.setProperty(
       '--forInput', 
@@ -334,7 +331,7 @@ const AM_Index = () => {
         </div>
       </div>
 
-      {type != "Manga" && <Trailer_Player data={{isOn: trailer.isPlay , func: playTrailer, type: type().toLowerCase(), id}} />}
+      {type() != "Manga" && <Trailer_Player data={{isOn: trailer.isPlay , func: playTrailer, type: type().toLowerCase(), id}} />}
 
     </section>
   )
